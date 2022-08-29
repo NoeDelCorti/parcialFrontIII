@@ -10,7 +10,7 @@
 
 import { useState } from 'react'
 
-export default function Item(props, handlerTotal) {
+export default function Item({props, handlerTotal}) {
   const [stock, setStock] = useState(props.stock)
 
   const handlerStock = () => {
@@ -19,8 +19,8 @@ export default function Item(props, handlerTotal) {
   }
 
   return (
-    <div className="producto">
-      <h3> {props.producto.nombre} </h3>
+    <div className='producto'>
+      <h3>{props.producto.nombre}</h3>
       <p> {props.producto.descripcion} </p>
       <h5> En stock: {stock === 0 ? <span>Agotado</span> : stock} </h5>
       {stock > 0 ? (
@@ -31,3 +31,5 @@ export default function Item(props, handlerTotal) {
     </div>
   )
 }
+
+
