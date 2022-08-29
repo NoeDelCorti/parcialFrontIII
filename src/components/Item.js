@@ -8,17 +8,26 @@
 //    h5 > span    (este span debe mostrar la cantidad si es mayor a 0 "agotado" si llega a 0)
 //    button       (este boton debe permitir comprar, pero si la cantidad es menor a 0 debe estar deshabilitado y decir "Sin stock")
 
-export default function Item(props) {
-    const [stock, setStock] = useState(props.stock)
-    const handlerStock = () =>{
-        stock > 0 && setStock(stock -1);
-    }
-        return (
-            <div className="producto">
-            <h3> {props.producto.nombre} </h3> 
-            <p> {props.producto.descripcion} </p>
-            <h5> En stock: </h5> 
-            <button onClick={handlerStock} > Comprar </button>
-            </div>
-        )
-        }
+import { useState } from 'react'
+
+export default function Item(props, handlerTotal) {
+  const [stock, setStock] = useState(props.stock)
+
+  const handlerStock = () => {
+    stock > 0 && setStock(stock - 1)
+    handlerTotal()
+  }
+
+  return (
+    <div className="producto">
+      <h3> {props.producto.nombre} </h3>
+      <p> {props.producto.descripcion} </p>
+      <h5> En stock: {stock === 0 ? <span>Agotado</span> : stock} </h5>
+      {stock > 0 ? (
+        <button onClick={handlerStock}>Comprar</button>
+      ) : (
+        <button disabled>Sin stock</button>
+      )}
+    </div>
+  )
+}
